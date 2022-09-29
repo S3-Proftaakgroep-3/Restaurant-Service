@@ -3,9 +3,7 @@ package com.mdma.restaurantservice.Controllers;
 import com.mdma.restaurantservice.Models.Restaurant;
 import com.mdma.restaurantservice.Services.RestaurantService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,10 @@ public class RestaurantController {
     @GetMapping
     public List<Restaurant> FetchAllProducts() {
         return restaurantService.GetAllProducts();
+    }
+
+    @GetMapping("/get")
+    public Restaurant FetchRestaurant(@RequestParam  String name){
+        return restaurantService.GetRestaurantByName(name);
     }
 }

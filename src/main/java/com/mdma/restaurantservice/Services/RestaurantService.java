@@ -15,4 +15,8 @@ public class RestaurantService {
     public List<Restaurant> GetAllProducts() {
         return repository.findAll();
     }
+
+    public Restaurant GetRestaurantByName(String name) {
+        return repository.findRestaurantByName(name);
+    }
 }
