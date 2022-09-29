@@ -20,22 +20,23 @@ public class RestaurantServiceApplication {
         SpringApplication.run(RestaurantServiceApplication.class, args);
     }
 
-//    @Bean
-//    CommandLineRunner runner(RestaurantRepository repository) {
-//        return args ->  {
-//            Restaurant restaurant = new Restaurant(
-//                "Steijn de pizza",
-//                new Menu(
-//                    new ArrayList<Product>(
-//                        Arrays.asList(
-//                            new Product("Kaas soep", "Lekker kaas soepje", 4.50, ProductSize.Small, "soep", true),
-//                            new Product("Kaas soep", "Lekker kaas soepje", 4.50, ProductSize.Small, "soep",true)
-//                        )
-//                    )
-//                )
-//            );
-//
-//            repository.insert(restaurant);
-        };
-    }
+    // @Bean
+    // CommandLineRunner runner(RestaurantRepository repository) {
+    // return args -> {
+    // Restaurant restaurant = new Restaurant(
+    // "Steijn de pizza",
+    // new Menu(
+    // new ArrayList<Product>(
+    // Arrays.asList(
+    // new Product("Kaas soep", "Lekker kaas soepje", 4.50, ProductSize.Small,
+    // "soep", true),
+    // new Product("Kaas soep", "Lekker kaas soepje", 4.50, ProductSize.Small,
+    // "soep",true)
+    // )
+    // )
+    // )
+    // );
+    //
+    // repository.insert(restaurant);
+
 }
