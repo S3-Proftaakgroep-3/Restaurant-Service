@@ -20,7 +20,24 @@ public class RestaurantController {
     }
 
     @GetMapping("/get")
-    public Restaurant FetchRestaurant(@RequestParam  String name){
+    public Restaurant FetchRestaurant(@RequestParam String name) {
         return restaurantService.GetRestaurantByName(name);
+    }
+
+    @PostMapping("/create")
+    public Restaurant createRestaurant(Restaurant restaurant) {
+
+        return restaurantService.postRestaurant(restaurant);
+
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteRestaurant(@PathVariable String id) {
+        restaurantService.deleteRestaurant(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public Restaurant updateRestaurant(Restaurant restaurant) {
+        return restaurantService.updateRestaurant(restaurant);
     }
 }
