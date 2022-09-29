@@ -19,4 +19,16 @@ public class RestaurantService {
     public Restaurant GetRestaurantByName(String name) {
         return repository.findRestaurantByName(name);
     }
+
+    public Restaurant postRestaurant(Restaurant restaurant) {
+        return repository.save(restaurant);
+    }
+
+    public void deleteRestaurant(String id) {
+        repository.deleteById(id);
+    }
+
+    public Restaurant updateRestaurant(Restaurant restaurant) {
+        return repository.save(restaurant);
+    }
 }
