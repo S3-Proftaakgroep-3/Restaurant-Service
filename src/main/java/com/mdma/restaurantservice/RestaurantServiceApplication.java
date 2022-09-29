@@ -24,7 +24,7 @@ public class RestaurantServiceApplication {
     CommandLineRunner runner(RestaurantRepository repository) {
         return args ->  {
             Restaurant restaurant = new Restaurant(
-                "Bread de bakker",
+                "Steijn de pizza",
                 new Menu(
                     new ArrayList<Product>(
                         Arrays.asList(
