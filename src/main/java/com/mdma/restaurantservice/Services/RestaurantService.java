@@ -17,11 +17,11 @@ public class RestaurantService {
     private final RestaurantRepository repository;
 
     public ResponseEntity<List<Restaurant>> GetAllProducts() {
-        return new ResponseEntity<List<Restaurant>>(repository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
 
     public ResponseEntity<Restaurant> GetRestaurantById(String id) {
-        return new ResponseEntity<Restaurant>(repository.findById(id).get(), HttpStatus.OK);
+        return new ResponseEntity<>(repository.findById(id).get(), HttpStatus.OK);
     }
 
     public ResponseEntity<Product> GetProductByID(String restaurantId, String id) {
@@ -40,27 +40,37 @@ public class RestaurantService {
 
     public ResponseEntity<String> postRestaurant(Restaurant restaurant) {
         if (repository.save(restaurant) == restaurant)
-            return new ResponseEntity<String>( "Restaurant has been saved" , HttpStatus.OK);
+            return new ResponseEntity<>( "Restaurant has been saved" , HttpStatus.OK);
         else
-            return new ResponseEntity<String>("Restaurant hasn't been saved", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Restaurant hasn't been saved", HttpStatus.BAD_REQUEST);
+    }
+
+    public ResponseEntity<String> addProductToRestaurant(String id, Product product) {
+        if (repository.findById(id).isPresent()) {
+            Restaurant restaurant = repository.findById(id).get();
+            restaurant.getMenu().getProducts().add(product);
+            repository.save(restaurant);
+            return new ResponseEntity<>("Done", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Couldnt find restaurant", HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<Boolean> deleteRestaurant(String id) {
         repository.deleteById(id);
-        return new ResponseEntity<Boolean>( true , HttpStatus.OK);
+        return new ResponseEntity<>( true , HttpStatus.OK);
     }
 
     public ResponseEntity<String> updateRestaurant(String id, Restaurant restaurant) {
         restaurant.setId(id);
         if (repository.findById(id).isPresent()){
             if (repository.save(restaurant) == restaurant){
-                return new ResponseEntity<String>( "Restaurant has been updated" , HttpStatus.OK);
+                return new ResponseEntity<>( "Restaurant has been updated" , HttpStatus.OK);
             }
             else
-                return new ResponseEntity<String>("Restaurant failed to update", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("Restaurant failed to update", HttpStatus.BAD_REQUEST);
         }
         else {
-            return new ResponseEntity<String>("Restaurant hasn't been updated: Restaurant not found", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Restaurant hasn't been updated: Restaurant not found", HttpStatus.BAD_REQUEST);
         }
     }
 }

@@ -35,6 +35,11 @@ public class RestaurantController {
         return restaurantService.postRestaurant(restaurant);
     }
 
+    @PostMapping("/add/product")
+    public ResponseEntity<String> addProductTorestaurant(@RequestParam String id, @RequestBody Product product){
+        return restaurantService.addProductToRestaurant(id, product);
+    }
+
     @DeleteMapping("/delete")
     public ResponseEntity<Boolean> deleteRestaurant(@RequestParam String id) {
         return restaurantService.deleteRestaurant(id);
