@@ -47,7 +47,7 @@ class RestaurantServiceTest {
         ResponseEntity<Restaurant> expectedResult = new ResponseEntity<Restaurant>(restaurant, HttpStatus.OK);
 
         // when the desired action performed
-        ResponseEntity<Restaurant> actualResponse = underTest.GetRestaurantByName("test123");
+        ResponseEntity<Restaurant> actualResponse = underTest.GetRestaurantById("test123");
 
         // then verify
         assertThat(actualResponse).isEqualTo(expectedResult);
