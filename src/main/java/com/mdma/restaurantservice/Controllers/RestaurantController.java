@@ -20,8 +20,8 @@ public class RestaurantController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<Restaurant> FetchRestaurant(@RequestParam String name) {
-        return restaurantService.GetRestaurantByName(name);
+    public ResponseEntity<Restaurant> FetchRestaurant(@RequestParam String id) {
+        return restaurantService.GetRestaurantById(id);
     }
 
     @PostMapping("/create")
