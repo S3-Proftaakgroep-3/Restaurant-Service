@@ -18,8 +18,8 @@ public class RestaurantService {
         return new ResponseEntity<List<Restaurant>>(repository.findAll(), HttpStatus.OK);
     }
 
-    public ResponseEntity<Restaurant> GetRestaurantByName(String name) {
-        return new ResponseEntity<Restaurant>(repository.findRestaurantByName(name), HttpStatus.OK);
+    public ResponseEntity<Restaurant> GetRestaurantById(String id) {
+        return new ResponseEntity<Restaurant>(repository.findById(id).get(), HttpStatus.OK);
     }
 
     public ResponseEntity<String> postRestaurant(Restaurant restaurant) {
