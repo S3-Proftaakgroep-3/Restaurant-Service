@@ -1,5 +1,7 @@
 package com.mdma.restaurantservice.Services;
 
+import com.mdma.restaurantservice.Models.Menu;
+import com.mdma.restaurantservice.Models.Product;
 import com.mdma.restaurantservice.Models.Restaurant;
 import com.mdma.restaurantservice.Repos.RestaurantRepository;
 import lombok.AllArgsConstructor;
@@ -21,6 +23,20 @@ public class RestaurantService {
     public ResponseEntity<Restaurant> GetRestaurantById(String id) {
         return new ResponseEntity<Restaurant>(repository.findById(id).get(), HttpStatus.OK);
     }
+
+    public ResponseEntity<Product> GetProductByID(String restaurantId, String id) {
+        if (repository.findById(restaurantId).isPresent()){
+            Menu menu = repository.findById(restaurantId).get().getMenu();
+            List<Product> products = menu.getProducts();
+            for (Product product : products){
+                if (product.getId().equals(id)){
+                    return new ResponseEntity<>(product, HttpStatus.OK);
+                }
+            }
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+
 
     public ResponseEntity<String> postRestaurant(Restaurant restaurant) {
         if (repository.save(restaurant) == restaurant)

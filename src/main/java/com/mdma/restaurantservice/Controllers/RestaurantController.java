@@ -1,5 +1,6 @@
 package com.mdma.restaurantservice.Controllers;
 
+import com.mdma.restaurantservice.Models.Product;
 import com.mdma.restaurantservice.Models.Restaurant;
 import com.mdma.restaurantservice.Services.RestaurantService;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,11 @@ public class RestaurantController {
     @GetMapping("/get")
     public ResponseEntity<Restaurant> FetchRestaurant(@RequestParam String id) {
         return restaurantService.GetRestaurantById(id);
+    }
+
+    @GetMapping("/get/product")
+    public ResponseEntity<Product> FetchProduct(@RequestParam String restaurantId, @RequestParam String id){
+        return restaurantService.GetProductByID(restaurantId, id);
     }
 
     @PostMapping("/create")
