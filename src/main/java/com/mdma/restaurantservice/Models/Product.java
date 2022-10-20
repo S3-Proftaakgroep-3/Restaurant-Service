@@ -16,8 +16,9 @@ public class Product {
     private ProductSize size;
     private String category;
     private Boolean active;
+    private Boolean isBeverage;
 
-    public Product(String name, String description, Double price, ProductSize size, String category, Boolean active) {
+    public Product(String name, String description, Double price, ProductSize size, String category, Boolean active, Boolean isBeverage) {
 
         this.id = new ObjectId().toString();
         this.name = name;
@@ -26,5 +27,6 @@ public class Product {
         this.size = size;
         this.category = category;
         this.active = active;
+        this.isBeverage = isBeverage;
     }
 }
