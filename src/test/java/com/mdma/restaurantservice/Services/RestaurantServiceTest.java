@@ -41,6 +41,7 @@ class RestaurantServiceTest {
         // for given input
         Restaurant restaurant = new Restaurant(
                 null,
+                null,
                 null);
 
         when(restaurantRepository.findRestaurantByName("test123")).thenReturn(restaurant);
@@ -56,7 +57,7 @@ class RestaurantServiceTest {
     @Test
     void postRestaurant() {
         // for given input
-        Restaurant restaurant = new Restaurant(null, null);
+        Restaurant restaurant = new Restaurant(null, null, null);
 
         // when the desired action performed
         underTest.postRestaurant(restaurant);
@@ -88,8 +89,8 @@ class RestaurantServiceTest {
     @Test
     void updateRestaurant() {
         // for given input
-        Restaurant restaurant = new Restaurant(null, null);
-        Restaurant updatedRestaurant = new Restaurant("test123", null);
+        Restaurant restaurant = new Restaurant(null, null, null);
+        Restaurant updatedRestaurant = new Restaurant("test123", null, null);
         restaurant.setId("test");
         updatedRestaurant.setId("test123");
 

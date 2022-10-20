@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
+
 @Data
 public class Restaurant {
     @Id
@@ -13,8 +15,11 @@ public class Restaurant {
     @Field("sub")
     private Menu menu;
 
-    public Restaurant(String name, Menu menu) {
+    private List<String> categories;
+
+    public Restaurant(String name, Menu menu, List<String> categories) {
         this.name = name;
         this.menu = menu;
+        this.categories = categories;
     }
 }
