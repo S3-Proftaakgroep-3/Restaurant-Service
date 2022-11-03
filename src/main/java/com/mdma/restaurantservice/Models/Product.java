@@ -18,14 +18,14 @@ public class Product {
     private String description;
     private Double price;
     private List<String> sizes;
-    private String category;
+    private Category category;
     private Boolean active;
     private Boolean isBeverage;
 
     @Nullable
     private List<String> allergies;
 
-    public Product(String name, String image, String description, Double price, List<String> sizes, String category, Boolean active, Boolean isBeverage) {
+    public Product(String name, String image, String description, Double price, List<String> sizes, Category category, Boolean active, Boolean isBeverage) {
 
         this.id = new ObjectId().toString();
         this.name = name;
