@@ -14,6 +14,7 @@ public class Product {
     @Id
     private String id;
     private String name;
+    private String image;
     private String description;
     private Double price;
     private ProductSize size;
@@ -24,10 +25,11 @@ public class Product {
     @Nullable
     private List<String> allergies;
 
-    public Product(String name, String description, Double price, ProductSize size, String category, Boolean active, Boolean isBeverage) {
+    public Product(String name, String image, String description, Double price, ProductSize size, String category, Boolean active, Boolean isBeverage) {
 
         this.id = new ObjectId().toString();
         this.name = name;
+        this.image = image;
         this.description = description;
         this.price = price;
         this.size = size;
