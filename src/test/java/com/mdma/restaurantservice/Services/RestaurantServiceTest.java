@@ -1,5 +1,7 @@
 package com.mdma.restaurantservice.Services;
 
+import com.mdma.restaurantservice.Models.Menu;
+import com.mdma.restaurantservice.Models.Product;
 import com.mdma.restaurantservice.Models.Restaurant;
 import com.mdma.restaurantservice.Repos.RestaurantRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -37,18 +40,38 @@ class RestaurantServiceTest {
     }
 
     @Test
-    void getRestaurantByName() {
+    void getRestaurantById() {
         // for given input
-        Restaurant restaurant = new Restaurant(
-                null,
-                null,
-                null);
+        Restaurant restaurant = new Restaurant(null, null, null );
 
-        when(restaurantRepository.findRestaurantByName("test123")).thenReturn(restaurant);
+        when(restaurantRepository.findById("test123")).thenReturn(Optional.of(restaurant));
         ResponseEntity<Restaurant> expectedResult = new ResponseEntity<Restaurant>(restaurant, HttpStatus.OK);
 
         // when the desired action performed
         ResponseEntity<Restaurant> actualResponse = underTest.GetRestaurantById("test123");
+
+        // then verify
+        assertThat(actualResponse).isEqualTo(expectedResult);
+    }
+
+    @Test
+    void getProductById() {
+        // for given input
+        Product product = new Product(null, null, null, null, null, null, null);
+
+        Menu menu = new Menu( List.of(product) );
+
+        Restaurant restaurant = new Restaurant(null, menu, null );
+
+        product.setId("test123");
+        restaurant.setId("test123");
+
+        when(restaurantRepository.findById("test123")).thenReturn(Optional.of(restaurant));
+
+        ResponseEntity<Product> expectedResult = new ResponseEntity<>(product, HttpStatus.OK);
+
+        // when the desired action performed
+        ResponseEntity<Product> actualResponse = underTest.GetProductByID("test123", "test123");
 
         // then verify
         assertThat(actualResponse).isEqualTo(expectedResult);
