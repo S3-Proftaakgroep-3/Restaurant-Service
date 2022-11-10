@@ -15,9 +15,9 @@ public class Restaurant {
     @Field("sub")
     private Menu menu;
 
-    private List<String> categories;
+    private List<Category> categories;
 
-    public Restaurant(String name, Menu menu, List<String> categories) {
+    public Restaurant(String name, Menu menu, List<Category> categories) {
         this.name = name;
         this.menu = menu;
         this.categories = categories;
