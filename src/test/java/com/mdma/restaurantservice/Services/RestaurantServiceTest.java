@@ -13,10 +13,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.offset;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -56,8 +58,10 @@ class RestaurantServiceTest {
 
     @Test
     void getProductById() {
+
+        List<String> allergies = new ArrayList<>();
         // for given input
-        Product product = new Product(null, null, null, null, null, null, null);
+        Product product = new Product(null, null, null, null, allergies , null, false, false);
 
         Menu menu = new Menu( List.of(product) );
 
