@@ -2,9 +2,9 @@ name: Build and push docker image
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "dockerhub" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "dockerhub" ]
 jobs:
   build-docker-image:
     runs-on: ubuntu-latest
