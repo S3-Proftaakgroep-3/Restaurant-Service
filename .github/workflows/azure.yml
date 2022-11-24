@@ -5,7 +5,7 @@ on:
     branches: ["main", "dev"]
 
 env:
-  IMAGE_NAME: RestaurantService
+  IMAGE_NAME: restaurantservice
 
 jobs:
   build:
