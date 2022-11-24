@@ -5,8 +5,13 @@ import com.mdma.restaurantservice.Models.Restaurant;
 import com.mdma.restaurantservice.Services.RestaurantService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/restaurant")
@@ -14,6 +19,11 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
+
+    @GetMapping("/user")
+    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
+        return Collections.singletonMap("name", principal.getAttribute("name"));
+    }
 
     @GetMapping
     public ResponseEntity<List<Restaurant>> FetchAllProducts() {

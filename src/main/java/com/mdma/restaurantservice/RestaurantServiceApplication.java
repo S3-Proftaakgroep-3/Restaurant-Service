@@ -1,42 +1,39 @@
 package com.mdma.restaurantservice;
 
-import com.mdma.restaurantservice.Enums.ProductSize;
-import com.mdma.restaurantservice.Models.Menu;
-import com.mdma.restaurantservice.Models.Product;
-import com.mdma.restaurantservice.Models.Restaurant;
-import com.mdma.restaurantservice.Repos.RestaurantRepository;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @SpringBootApplication
-public class RestaurantServiceApplication {
+public class RestaurantServiceApplication extends WebSecurityConfigurerAdapter {
 
     public static void main(String[] args) {
         SpringApplication.run(RestaurantServiceApplication.class, args);
     }
-}
 
-//    @Bean
-//    CommandLineRunner runner(RestaurantRepository repository) {
-//        return args -> {
-//            Restaurant restaurant = new Restaurant(
-//                    "Steijn de pizza",
-//                    new Menu(
-//                            new ArrayList<Product>(
-//                                    Arrays.asList(
-//                                            new Product("Kaas soep", "Lekker kaas soepje", 4.50, ProductSize.Small,
-//                                                    "soep", true),
-//                                            new Product("Kaas soep", "Lekker kaas soepje", 4.50, ProductSize.Small,
-//                                                    "soep",true)
-//                                    )
-//                            )
-//                    )
-//            );
-//
-//            repository.insert(restaurant);
-//        }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // @formatter:off
+        http
+                .authorizeRequests(a -> a
+                        .antMatchers("/", "/error", "/webjars/**", "/logout").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .exceptionHandling(e -> e
+                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                )
+                .logout(l -> l
+                        .logoutSuccessUrl("/").permitAll()
+                )
+                .csrf(c -> c
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                )
+                .oauth2Login()
+                .defaultSuccessUrl("http://localhost:8080/", true);
+        // @formatter:on
+    }
+}
