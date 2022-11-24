@@ -2,10 +2,10 @@ name: Push Image To Azure
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "dev", "azure"]
 
 env:
-  IMAGE_NAME: RestaurantService
+  IMAGE_NAME: restaurantservice
 
 jobs:
   build:
