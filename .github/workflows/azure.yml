@@ -2,7 +2,7 @@ name: Push Image To Azure
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "dev"]
 
 env:
   IMAGE_NAME: RestaurantService
