@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/restaurant")
 @AllArgsConstructor
@@ -36,7 +37,7 @@ public class RestaurantController {
     }
 
     @PostMapping("/add/product")
-    public ResponseEntity<String> addProductTorestaurant(@RequestParam String id, @RequestBody Product product){
+    public ResponseEntity<String> addProductToRestaurant(@RequestParam String id, @RequestBody Product product){
         return restaurantService.addProductToRestaurant(id, product);
     }
 
