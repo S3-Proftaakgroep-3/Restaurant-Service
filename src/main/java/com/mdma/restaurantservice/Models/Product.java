@@ -23,6 +23,9 @@ public class Product {
     private Boolean isBeverage;
 
     @Nullable
+    private List<ExtraOptions> extras;
+
+    @Nullable
     private List<String> allergies;
 
     public Product(String name, String image, String description, Double price, List<String> sizes, String category, Boolean active, Boolean isBeverage) {
