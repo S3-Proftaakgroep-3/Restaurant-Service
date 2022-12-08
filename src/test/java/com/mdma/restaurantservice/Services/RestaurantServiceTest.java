@@ -59,12 +59,10 @@ class RestaurantServiceTest {
     @Test
     void getProductById() {
 
-        List<String> allergies = new ArrayList<>();
         // for given input
+        List<String> allergies = new ArrayList<>();
         Product product = new Product(null, null, null, null, allergies , null, false, false);
-
         Menu menu = new Menu( List.of(product) );
-
         Restaurant restaurant = new Restaurant(null, menu, null );
 
         product.setId("test123");
@@ -98,6 +96,29 @@ class RestaurantServiceTest {
         Restaurant capturedRestaurant = restaurantArgumentCaptor.getValue();
 
         assertThat(capturedRestaurant).isEqualTo(restaurant);
+    }
+
+    @Test
+    void addProductToRestaurant() {
+
+        // for given input
+        List<String> allergies = new ArrayList<>();
+        Menu menu = new Menu( new ArrayList<>() );
+
+        Product product = new Product(null, null, null, null, allergies , null, false, false);
+        Restaurant restaurant = new Restaurant(null, menu, null );
+
+        restaurant.setId("test123");
+
+        when(restaurantRepository.findById("test123")).thenReturn(Optional.of(restaurant));
+        var expectedResponse = new ResponseEntity<>("Done", HttpStatus.OK);
+
+        // when the desired action performed
+        var actualResponse = underTest.addProductToRestaurant(restaurant.getId(), product);
+
+        // then verify
+        assertThat(actualResponse).isEqualTo(expectedResponse);
+
     }
 
     @Test
